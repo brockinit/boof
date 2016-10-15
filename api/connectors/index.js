@@ -9,6 +9,7 @@ const sequelize = new Sequelize('boof', null, null, {
   host: 'localhost',
   dialect: 'postgres',
 });
+dataloaderSequelize(sequelize);
 const db = {};
 
 fs
@@ -29,7 +30,5 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-dataloaderSequelize(db.sequelize);
 
 module.exports = db.sequelize.models;
