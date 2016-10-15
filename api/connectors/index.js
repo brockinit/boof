@@ -1,6 +1,7 @@
 'use strict';
 import fs from 'fs';
 import path from 'path';
+import dataloaderSequelize from 'dataloader-sequelize';
 import Sequelize from 'sequelize';
 // import env = process.env.NODE_ENV || 'development';
 // var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
@@ -28,5 +29,7 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+dataloaderSequelize(db.sequelize);
 
 module.exports = db.sequelize.models;

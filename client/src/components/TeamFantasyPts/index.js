@@ -18,7 +18,6 @@ class TeamFantasyPts extends Component {
       let passYards = 0;
       let rushTds = 0;
       let passTds = 0;
-      let games = 0;
       let totalSacks = 0;
 
       nextProps.plays.forEach(({ rushPlays, passPlays, touchdowns, sacks }) => {
@@ -40,7 +39,7 @@ class TeamFantasyPts extends Component {
           }
         });
       });
-      console.log(games, 'games');
+      console.log(this.props.team, 'team');
       console.log(totalRushPlays, 'rushPlays');
       console.log(totalPassPlays, 'passPlays');
       console.log(passYards, 'passYards');

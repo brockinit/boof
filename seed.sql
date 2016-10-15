@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS boof;
-
-CREATE DATABASE boof;
-
 \c boof;
 
 --

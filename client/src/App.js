@@ -12,20 +12,20 @@ const nflTeams = [
 
 class App extends Component {
   render() {
-    // const teamStats = nflTeams.map((team) => 
-    //   <TeamFantasyPts 
+    const teamStats = nflTeams.map((team) => 
+      <TeamFantasyPts 
+        key={team} 
+        team={team} 
+        seas={2016}
+        wk={[1,2,3,4,5]} />
+    );
+    // const cbStats = nflTeams.map((team) => 
+    //   <CbStrength 
     //     key={team} 
     //     team={team} 
     //     seas={2016}
     //     wk={[1,2,3,4]} />
     // );
-    const cbStats = nflTeams.map((team) => 
-      <CbStrength 
-        key={team} 
-        team={team} 
-        seas={2016}
-        wk={[1,2,3,4]} />
-    );
     return (
       <div className="container">
         <div className="App-header">
@@ -33,7 +33,7 @@ class App extends Component {
           <h2>Better Odds of Football</h2>
         </div>
         <div>
-          {cbStats}
+          {teamStats}
         </div>
       </div>
     );
