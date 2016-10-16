@@ -13,6 +13,10 @@
   color: white;
 }
 
+.buttons {
+  text-align: center;
+}
+
 .App-header app-bar {
   background-color: #ffffff;
   color: #000;
