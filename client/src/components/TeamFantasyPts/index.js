@@ -81,7 +81,7 @@ class TeamFantasyPts extends Component {
     return (
         <div className="four columns card">
           <Card>
-            <CardHeader title={fpPer.team} />
+            <CardHeader title={fpPer.team} avatar={this.props.avatar}  />
             <CardText>
               <code>{fpPer.pointsPerRush} points per rush</code>
               <br />

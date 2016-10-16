@@ -3,22 +3,17 @@ import logo from './logo.svg';
 import { TeamFantasyPts, CbStrength } from './components';
 import AppBar from 'material-ui/AppBar';
 import './App.css';
-
-const nflTeams = [
-  'DEN', 'CLE', 'OAK', 'PIT', 'NE', 'GB', 'CHI', 'DET', 'KC',
-  'HOU', 'NYJ', 'NYG', 'PHI', 'IND', 'BUF', 'MIA', 'WAS', 'CAR',
-  'JAC', 'LA', 'SEA', 'NO', 'ARI', 'SD', 'TEN', 'TB', 'CIN',
-  'BAL', 'DAL', 'ATL', 'MIN', 'SF'
-];
+import { nflTeams } from './constants';
 
 class App extends Component {
   render() {
-    const teamStats = nflTeams.map((team, i) => {
+    const teamStats = nflTeams.map(({ team, logo }, i) => {
       if (i === 0 || i % 3 === 0) {
         return (
           <div className="row">
             <TeamFantasyPts 
-              key={team} 
+              key={team}
+              avatar={logo} 
               team={team} 
               seas={2016}
               wk={[1,2,3,4,5]} />
@@ -28,7 +23,8 @@ class App extends Component {
       return (
       <TeamFantasyPts 
         key={team} 
-        team={team} 
+        team={team}
+        avatar={logo} 
         seas={2016}
         wk={[1,2,3,4,5]} />
       );
