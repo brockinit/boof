@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { TeamFantasyPts, CbStrength } from './components';
+import AppBar from 'material-ui/AppBar';
+import './App.css';
 
 const nflTeams = [
   'DEN', 'CLE', 'OAK', 'PIT', 'NE', 'GB', 'CHI', 'DET', 'KC',
@@ -12,13 +13,26 @@ const nflTeams = [
 
 class App extends Component {
   render() {
-    const teamStats = nflTeams.map((team) => 
+    const teamStats = nflTeams.map((team, i) => {
+      if (i === 0 || i % 3 === 0) {
+        return (
+          <div className="row">
+            <TeamFantasyPts 
+              key={team} 
+              team={team} 
+              seas={2016}
+              wk={[1,2,3,4,5]} />
+          </div>
+        );
+      }
+      return (
       <TeamFantasyPts 
         key={team} 
         team={team} 
         seas={2016}
         wk={[1,2,3,4,5]} />
-    );
+      );
+    }); 
     // const cbStats = nflTeams.map((team) => 
     //   <CbStrength 
     //     key={team} 
@@ -29,10 +43,9 @@ class App extends Component {
     return (
       <div className="container">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Better Odds of Football</h2>
+          <AppBar title="Better Odds of Football" />
         </div>
-        <div>
+        <div className="cards">
           {teamStats}
         </div>
       </div>

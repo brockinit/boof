@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { playQuery } from '../../queries';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 class TeamFantasyPts extends Component {
   constructor(props) {
@@ -78,21 +79,23 @@ class TeamFantasyPts extends Component {
     const { fpPer } = this.state;
     if (!fpPer) return null;
     return (
-        <div className="row">
-          <h6>{fpPer.team}</h6>
-          <div>
-            <code>{fpPer.pointsPerRush} points per rush</code>
-            <br />
-            <code>{fpPer.pointsPerPass} points per pass</code>
-            <br />
-            <code>{fpPer.totalRushFantasyPoints.toFixed(2)} total rush fantasy points</code>
-            <br />
-            <code>{fpPer.totalPassFantasyPoints.toFixed(2)} total pass fantasy points</code>
-            <br />
-            <code>{fpPer.totalFantasyPoints.toFixed(2)} total fantasy points</code>
-            <br />
-            <code>{fpPer.totalSacks} total sacks</code>
-          </div>
+        <div className="four columns card">
+          <Card>
+            <CardHeader title={fpPer.team} />
+            <CardText>
+              <code>{fpPer.pointsPerRush} points per rush</code>
+              <br />
+              <code>{fpPer.pointsPerPass} points per pass</code>
+              <br />
+              <code>{fpPer.totalRushFantasyPoints.toFixed(2)} total rush fantasy points</code>
+              <br />
+              <code>{fpPer.totalPassFantasyPoints.toFixed(2)} total pass fantasy points</code>
+              <br />
+              <code>{fpPer.totalFantasyPoints.toFixed(2)} total fantasy points</code>
+              <br />
+              <code>{fpPer.totalSacks} total sacks</code>
+            </CardText>
+          </Card>
         </div>
       );
     }
