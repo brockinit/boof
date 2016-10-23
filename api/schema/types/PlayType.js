@@ -1,6 +1,11 @@
 import { attributeFields, resolver } from 'graphql-sequelize';
 import { play, pass, rush, sack, td } from '../../connectors';
-import { GraphQLObjectType, GraphQLList } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLList,
+  GraphQLString,
+  GraphQLInt,
+} from 'graphql';
 import assign from 'lodash/assign';
 import RushType from './RushType';
 import PassType from './PassType';
@@ -22,6 +27,12 @@ module.exports = new GraphQLObjectType({
     },
     passPlays: {
       type: new GraphQLList(PassType),
+      args: {
+        loc: { type: GraphQLString },
+        succ: { type: GraphQLInt },
+        trg: { type: GraphQLString },
+        comp: { type: GraphQLInt },
+      },
       description: 'Pass Plays',
       resolve: resolver(play.passPlays),
     },

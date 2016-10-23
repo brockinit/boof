@@ -28,7 +28,7 @@ class App extends Component {
               avatar={logo} 
               team={team} 
               seas={2016}
-              wk={[1,2,3,4,5]} />
+              wk={[1,2,3,4,5,6]} />
           </div>
         );
       }
@@ -39,7 +39,7 @@ class App extends Component {
         team={team}
         avatar={logo} 
         seas={2016}
-        wk={[1,2,3,4,5]} />
+        wk={[1,2,3,4,5,6]} />
       );
     }); 
     // const cbStats = nflTeams.map((team) => 

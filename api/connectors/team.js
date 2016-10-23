@@ -322,6 +322,10 @@ export default function (db, Sequelize) {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    wr1a: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     wr1y: {
       type: Sequelize.INTEGER,
       allowNull: false,
