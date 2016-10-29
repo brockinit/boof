@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { nflTeams } from './constants';
+import { nflTeams, clickedColor, unclickedColor, seasons } from './constants';
 import { TeamFantasyPts, CbStrength } from './components';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
-import './App.css';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -14,9 +16,24 @@ class App extends Component {
       defenseLabelColor: '#f2f2f2',
       offenseColor: '#fff',
       offenseLabelColor: '#000',
-      offOrDef: 'def'
+      seas: 2016,
+      wks: { value: [1,2,3,4,5,6,7], label: 'Season' },
     };
+    this.changeSeason = this.changeSeason.bind(this);
+    this.changeWeeks = this.changeWeeks.bind(this);
   }
+
+  changeSeason(e, i, value) {
+    this.setState({ seas: value });
+  }
+
+  changeWeeks(e, i, value) {
+    if (value.length > 3) {
+      this.setState({ wks: { value, label: 'Season' } });
+    }
+    this.setState({ wks: { value, label: 'Last 3 Weeks' } });
+  }
+
   render() {
     const teamStats = nflTeams.map(({ team, logo }, i) => {
       if (i === 0 || i % 3 === 0) {
@@ -27,8 +44,8 @@ class App extends Component {
               offOrDef={this.state.offOrDef}
               avatar={logo} 
               team={team} 
-              seas={2016}
-              wk={[1,2,3,4,5,6]} />
+              seas={this.state.seas}
+              wk={this.state.wks.value} />
           </div>
         );
       }
@@ -38,35 +55,47 @@ class App extends Component {
         offOrDef={this.state.offOrDef}
         team={team}
         avatar={logo} 
-        seas={2016}
-        wk={[1,2,3,4,5,6]} />
+        seas={this.state.seas}
+        wk={this.state.wks.value} />
       );
     }); 
-    // const cbStats = nflTeams.map((team) => 
-    //   <CbStrength 
-    //     key={team} 
-    //     team={team} 
-    //     seas={2016}
-    //     wk={[1,2,3,4]} />
-    // );
     return (
       <div className="container">
         <div className="App-header">
           <AppBar title="Better Odds of Football" />
           <div className="row buttons">
-            <div className="six columns">
-              <RaisedButton 
-                label="Offense" 
-                labelColor={this.state.offenseLabelColor}
-                backgroundColor={this.state.offenseColor}
-              />
+            <div className="four columns">
+              <SelectField
+                floatingLabelText="Season"
+                value={this.state.seas}
+                onChange={this.changeSeason}
+              >
+                {seasons.map(seas =>
+                  <MenuItem 
+                    key={seas} 
+                    value={seas} 
+                    primaryText={`${seas.toString()}`} 
+                  />
+                )}
+              </SelectField>
             </div>
-            <div className="six columns">
-              <RaisedButton 
-                label="Defense" 
-                labelColor={this.state.defenseLabelColor}
-                backgroundColor={this.state.defenseColor}
-              />
+            <div className="four columns">
+              <SelectField
+                floatingLabelText="Weeks"
+                value={this.state.wks.label}
+                onChange={this.changeWeeks}
+              >
+                <MenuItem  
+                  value={[5,6,7]} 
+                  primaryText="Last 3 Weeks" 
+                />
+                <MenuItem  
+                  value={[1,2,3,4,5,6,7]} 
+                  primaryText="Full Season" 
+                />
+              </SelectField>
+            </div>
+            <div className="four columns">
             </div>
           </div>
         </div>

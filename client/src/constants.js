@@ -1,3 +1,4 @@
+/* List of NFL Teams and Logos */
 export const nflTeams = [
   { team: 'DEN', logo: 'https://upload.wikimedia.org/wikipedia/en/4/44/Denver_Broncos_logo.svg' },
   { team: 'CLE', logo: 'https://upload.wikimedia.org/wikipedia/en/5/5a/Cleveland_Browns_Logo.svg' },
@@ -31,4 +32,13 @@ export const nflTeams = [
   { team: 'MIN', logo: '' },
   { team: 'SF', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/83/49ers_Logo.svg' },
   { team: 'NYG', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/60/New_York_Giants_logo.svg'}
+];
+
+/* Button Colors */
+export const clickedColor = { color: '#039be5', labelColor: '#f2f2f2' };
+export const unclickedColor = { color: '#fff', labelColor: '#000' };
+
+export const seasons = [ 
+  2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008,
+  2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000
 ];
