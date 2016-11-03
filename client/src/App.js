@@ -8,9 +8,7 @@ class App extends Component {
   render() { 
     return (
       <div className="container">
-        <div className="App-header">
-          <AppBar title="Better Odds of Football" />
-        </div>
+        <AppBar title="Better Odds of Football" />
         <Dashboard />
       </div>
     );

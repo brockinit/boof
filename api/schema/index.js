@@ -6,8 +6,8 @@ import {
   GraphQLList,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import { GameType } from './types';
-import { game } from '../connectors';
+import { GameType, ScheduleType } from './types';
+import { game, schedule } from '../connectors';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -22,6 +22,14 @@ const RootQueryType = new GraphQLObjectType({
         h: { type: GraphQLString },
       },
       resolve: resolver(game),
+    },
+    schedule: {
+      type: new GraphQLList(ScheduleType),
+      args: {
+        seas: { type: GraphQLInt },
+        wk: { type: GraphQLInt },
+      },
+      resolve: resolver(schedule),
     },
   },
 });
