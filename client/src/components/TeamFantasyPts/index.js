@@ -3,13 +3,15 @@ import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 class TeamFantasyPts extends Component {
   render() {
-    const { stats, avatar } = this.props;
+    const { stats, avatar, rank } = this.props;
     if (!stats) return null;
     return (
       <div className="four columns card">
         <Card>
-          <CardHeader title={stats.team} avatar={avatar}  />
+          <CardHeader title={`${stats.team} (${rank})`} avatar={avatar}  />
           <CardText>
+            <code><strong>Opponent ({stats.opponent})</strong></code>
+            <br />          
             <code>{stats.pointsPerRush} points per rush</code>
             <br />
             <code>{stats.pointsPerPass} points per pass</code>

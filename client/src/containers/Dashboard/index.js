@@ -3,7 +3,7 @@ import { nflTeams, clickedColor, unclickedColor, seasons } from '../../constants
 import { TeamFantasyPts } from '../../components';
 import { flattenPlays } from '../../utils'; 
 import { graphql } from 'react-apollo';
-import { playQuery } from '../../queries';
+import { playQuery, scheduleQuery } from '../../queries';
 import { withApollo } from 'react-apollo';
 import ApolloClient from 'apollo-client';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -30,6 +30,16 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    this.props.client.query({
+      query: scheduleQuery,
+      variables: {
+        seas: this.state.seas,
+        wk: 9,
+      },
+    })
+    .then(({ data }) => {
+      this.setState({ games: data.schedule });
+    });
     nflTeams.forEach(({ team }) => {
       this.props.client.query({
         query: playQuery,
@@ -88,11 +98,23 @@ class Dashboard extends Component {
         const totalFantasyPoints = totalRushFantasyPoints + totalPassFantasyPoints;
         const pointsPerRush = +(totalRushFantasyPoints / totalRushPlays).toFixed(2);
         const pointsPerPass = +(totalPassFantasyPoints / totalPassPlays).toFixed(2);
+        const game = this.state.games.find((game) => {
+          return game.v === team || game.h === team;
+        });
+        let opponent = 'BYE';
+        if (game) {
+          if (game.v === team) {
+            opponent = game.h;
+          } else {
+            opponent = game.v;
+          }
+        }
         this.setState({ 
           fpPer: [
             ...this.state.fpPer, 
             { 
               team,
+              opponent,
               pointsPerRush, 
               pointsPerPass,
               totalPassFantasyPoints,
@@ -132,6 +154,7 @@ class Dashboard extends Component {
           <div className="row" key={i}>
             <TeamFantasyPts 
               key={stats.team}
+              rank={i + 1}
               stats={stats}
               avatar={logo}  />
           </div>
@@ -140,6 +163,7 @@ class Dashboard extends Component {
       return (
         <TeamFantasyPts 
           key={stats.team} 
+          rank={i + 1}
           stats={stats}
           avatar={logo} />
       );
