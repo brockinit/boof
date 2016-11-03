@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { nflTeams, clickedColor, unclickedColor, seasons } from '../../constants';
+import { 
+  nflTeams, 
+  clickedColor, 
+  unclickedColor, 
+  seasons,
+  teamMetrics,
+} from '../../constants';
 import { TeamFantasyPts } from '../../components';
 import { flattenPlays } from '../../utils'; 
 import { graphql } from 'react-apollo';
@@ -25,7 +31,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-    this.changeSeason = this.changeSeason.bind(this);
+    this.changeSortBy = this.changeSortBy.bind(this);
     this.changeWeeks = this.changeWeeks.bind(this);
   }
 
@@ -128,8 +134,8 @@ class Dashboard extends Component {
     });
   }
 
-  changeSeason(e, i, value) {
-    this.setState({ seas: value });
+  changeSortBy(e, i, value) {
+    this.setState({ sortField: value });
   }
 
   changeWeeks(e, i, value) {
@@ -140,6 +146,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.state.sortField, 'field');
     const { sortField, fpPer, seas, wks } = this.state;
     let sorted = [];
     if (fpPer.length === 32) {
@@ -175,14 +182,14 @@ class Dashboard extends Component {
             <div className="four columns">
               <SelectField
                 floatingLabelText="Season"
-                value={seas}
-                onChange={this.changeSeason}
+                value={sortField}
+                onChange={this.changeSortBy}
               >
-                {seasons.map(seas =>
+                {teamMetrics.map(metric =>
                   <MenuItem 
-                    key={seas} 
-                    value={seas} 
-                    primaryText={`${seas.toString()}`} 
+                    key={metric} 
+                    value={metric} 
+                    primaryText={metric} 
                   />
                 )}
               </SelectField>
