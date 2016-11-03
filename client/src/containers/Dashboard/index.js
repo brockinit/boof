@@ -10,18 +10,21 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
+const initialState = {
+  defenseColor: '#039be5',
+  defenseLabelColor: '#f2f2f2',
+  offenseColor: '#fff',
+  offenseLabelColor: '#000',
+  seas: 2016,
+  sortField: 'pointsPerRush',
+  wks: { value: [6,7,8], label: 'Season' },
+  fpPer: [],
+};
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      defenseColor: '#039be5',
-      defenseLabelColor: '#f2f2f2',
-      offenseColor: '#fff',
-      offenseLabelColor: '#000',
-      seas: 2016,
-      wks: { value: [1,2,3,4,5,6,7,8], label: 'Season' },
-      fpPer: [],
-    };
+    this.state = initialState;
     this.changeSeason = this.changeSeason.bind(this);
     this.changeWeeks = this.changeWeeks.bind(this);
   }
@@ -115,11 +118,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    const sortField = 'pointsPerRush';
+    const { sortField, fpPer, seas, wks } = this.state;
     let sorted = [];
-    if (this.state.fpPer.length === 32) {
-      sorted = this.state.fpPer.sort((a, b) => {
-        return a[sortField] - b[sortField];
+    if (fpPer.length === 32) {
+      sorted = fpPer.sort((a, b) => {
+        return b[sortField] - a[sortField];
       });
     }
     const teamStats = sorted.map((stats, i) => {
@@ -148,7 +151,7 @@ class Dashboard extends Component {
             <div className="four columns">
               <SelectField
                 floatingLabelText="Season"
-                value={this.state.seas}
+                value={seas}
                 onChange={this.changeSeason}
               >
                 {seasons.map(seas =>
@@ -163,7 +166,7 @@ class Dashboard extends Component {
             <div className="four columns">
               <SelectField
                 floatingLabelText="Weeks"
-                value={this.state.wks.label}
+                value={wks.label}
                 onChange={this.changeWeeks}
               >
                 <MenuItem  
