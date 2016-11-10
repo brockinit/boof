@@ -1,18 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { 
   nflTeams, 
-  clickedColor, 
-  unclickedColor, 
-  seasons,
   teamMetrics,
 } from '../../constants';
 import { TeamFantasyPts } from '../../components';
-import { flattenPlays } from '../../utils'; 
-import { graphql } from 'react-apollo';
+import { flattenPlays, calculateFpPer } from '../../utils'; 
 import { playQuery, scheduleQuery } from '../../queries';
 import { withApollo } from 'react-apollo';
 import ApolloClient from 'apollo-client';
-import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -23,7 +18,7 @@ const initialState = {
   offenseLabelColor: '#000',
   seas: 2016,
   sortField: 'pointsPerRush',
-  wks: { value: [6,7,8], label: 'Season' },
+  wks: { value: [7,8,9], label: 'Season' },
   fpPer: [],
 };
 
@@ -36,16 +31,17 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    /* Query current schedule */
     this.props.client.query({
       query: scheduleQuery,
       variables: {
         seas: this.state.seas,
-        wk: 9,
+        wk: 10,
       },
     })
-    .then(({ data }) => {
-      this.setState({ games: data.schedule });
-    });
+    .then(({ data }) => this.setState({ games: data.schedule }));
+
+    /* Query plays for each team's games */
     nflTeams.forEach(({ team }) => {
       this.props.client.query({
         query: playQuery,
@@ -55,82 +51,8 @@ class Dashboard extends Component {
           team,
         },
       })
-      .then(({ data }) => {
-        const plays = flattenPlays(data.away, data.home);
-        let totalRushPlays = 0;
-        let totalPassPlays = 0;
-        let rushYards = 0;
-        let passYards = 0;
-        let rushTds = 0;
-        let passTds = 0;
-        let totalSacks = 0;
-
-        plays.forEach(({ rushPlays, passPlays, touchdowns, sacks }) => {
-          sacks.forEach(() => totalSacks++);
-          rushPlays.forEach((rush) =>  {
-            rushYards += rush.yds;
-            totalRushPlays++;
-          });
-          passPlays.forEach((pass) =>  {
-            passYards += pass.yds;
-            totalPassPlays++;
-          });
-          touchdowns.forEach((td, i) => {
-            if (td.type === 'RUSH') {
-              rushTds++;
-            }
-            if (td.type === 'REC') {
-              passTds++;
-            }
-          });
-        });
-        console.log(team, 'team');
-        console.log(totalRushPlays, 'rushPlays');
-        console.log(totalPassPlays, 'passPlays');
-        console.log(passYards, 'passYards');
-        console.log(rushYards, 'rushYards');
-        console.log(passTds, 'passTds');
-        console.log(rushTds, 'rushTds');
-        const rushFantasyPoints = {
-          rushYards: rushYards * 0.1,
-          rushScores: rushTds * 6,
-        };
-        const passFantasyPoints = {
-          passYards: passYards / 25,
-          passScores: passTds * 4,
-        };
-        const totalRushFantasyPoints = rushFantasyPoints.rushYards + rushFantasyPoints.rushScores;
-        const totalPassFantasyPoints = passFantasyPoints.passYards + passFantasyPoints.passScores;
-        const totalFantasyPoints = totalRushFantasyPoints + totalPassFantasyPoints;
-        const pointsPerRush = +(totalRushFantasyPoints / totalRushPlays).toFixed(2);
-        const pointsPerPass = +(totalPassFantasyPoints / totalPassPlays).toFixed(2);
-        const game = this.state.games.find((game) => {
-          return game.v === team || game.h === team;
-        });
-        let opponent = 'BYE';
-        if (game) {
-          if (game.v === team) {
-            opponent = game.h;
-          } else {
-            opponent = game.v;
-          }
-        }
-        this.setState({ 
-          fpPer: [
-            ...this.state.fpPer, 
-            { 
-              team,
-              opponent,
-              pointsPerRush, 
-              pointsPerPass,
-              totalPassFantasyPoints,
-              totalRushFantasyPoints,
-              totalFantasyPoints,
-              totalSacks,
-            },
-          ],
-        });
-      });
+      .then(({ data }) => calculateFpPer(data, team, this.state.games))
+      .then((statTotals) => this.setState({ fpPer: [...this.state.fpPer, statTotals] }))
     });
   }
 
@@ -201,7 +123,7 @@ class Dashboard extends Component {
                 onChange={this.changeWeeks}
               >
                 <MenuItem  
-                  value={[6,7,8]} 
+                  value={[7,8,9]} 
                   primaryText="Last 3 Weeks" 
                 />
                 <MenuItem  
