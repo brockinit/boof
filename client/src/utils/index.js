@@ -61,8 +61,14 @@ function findStatSums(plays) {
 /*
   * Calculates fantasy points per play metrics
 */
-export function calculateFpPer(data, team, games) {
-  const plays = flattenPlays(data.away, data.home);
+export function calculateFpPer(data, team, games, wks) {
+  let { away, home } = data;
+  if (data.away.length + data.home.length >= wks.length) {
+    const oldWeek = Math.min.apply(Math, wks);
+    away = away.filter(({ wk }) => wk !== oldWeek);
+    home = home.filter(({ wk }) => wk !== oldWeek);
+  }
+  const plays = flattenPlays(away, home);
   const {
     totalRushPlays,
     totalPassPlays,

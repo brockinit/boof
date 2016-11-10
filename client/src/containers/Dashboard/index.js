@@ -19,7 +19,7 @@ const initialState = {
   offenseLabelColor: '#000',
   seas: 2016,
   sortField: 'pointsPerRush',
-  wks: { value: [7,8,9], label: 'Season' },
+  wks: { value: [6,7,8,9], label: 'Season' },
   currentWk: 10,
   fpPer: [],
   loading: true,
@@ -53,11 +53,11 @@ class Dashboard extends Component {
         query: playQuery,
         variables: {
           seas: this.state.seas,
-          wk: this.state.wks.value,
           team,
+          wk: this.state.wks.value,
         },
       })
-      .then(({ data }) => calculateFpPer(data, team, this.state.games))
+      .then(({ data }) => calculateFpPer(data, team, this.state.games, this.state.wks.value))
       .then(statTotals => fpPer = [...fpPer, statTotals])
       .then(() => {
         if (fpPer.length === 32) {
@@ -79,7 +79,9 @@ class Dashboard extends Component {
   }
 
   sortResult(fpPer) {
-    return fpPer.sort((a, b) => b[this.state.sortField] - a[this.state.sortField]);
+    return fpPer
+      .sort((a, b) => b[this.state.sortField] - a[this.state.sortField])
+      .filter(({ opponent }) => opponent !== 'BYE');
   }
 
   render() {
@@ -139,7 +141,7 @@ class Dashboard extends Component {
                   primaryText="Last 3 Weeks" 
                 />
                 <MenuItem  
-                  value={[1,2,3,4,5,6,7,8]} 
+                  value={[1,2,3,4,5,6,7,8,9]} 
                   primaryText="Full Season" 
                 />
               </SelectField>
