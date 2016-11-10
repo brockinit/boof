@@ -9,6 +9,7 @@ import { playQuery, scheduleQuery } from '../../queries';
 import { withApollo } from 'react-apollo';
 import ApolloClient from 'apollo-client';
 import SelectField from 'material-ui/SelectField';
+import CircularProgress from 'material-ui/CircularProgress';
 import MenuItem from 'material-ui/MenuItem';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   sortField: 'pointsPerRush',
   wks: { value: [7,8,9], label: 'Season' },
   fpPer: [],
+  loading: true,
 };
 
 class Dashboard extends Component {
@@ -28,9 +30,12 @@ class Dashboard extends Component {
     this.state = initialState;
     this.changeSortBy = this.changeSortBy.bind(this);
     this.changeWeeks = this.changeWeeks.bind(this);
+    this.sortResult = this.sortResult.bind(this);
   }
 
   componentDidMount() {
+    let fpPer = [];
+
     /* Query current schedule */
     this.props.client.query({
       query: scheduleQuery,
@@ -52,8 +57,13 @@ class Dashboard extends Component {
         },
       })
       .then(({ data }) => calculateFpPer(data, team, this.state.games))
-      .then((statTotals) => this.setState({ fpPer: [...this.state.fpPer, statTotals] }))
-    });
+      .then((statTotals) => fpPer = [...fpPer, statTotals])
+      .then(() => {
+        if (fpPer.length === 32) {
+          this.setState({ fpPer, loading: false });
+        }
+      });
+    })
   }
 
   changeSortBy(e, i, value) {
@@ -67,14 +77,15 @@ class Dashboard extends Component {
     this.setState({ wks: { value, label: 'Last 3 Weeks' } });
   }
 
+  sortResult(fpPer) {
+    return fpPer.sort((a, b) => b[this.state.sortField] - a[this.state.sortField]);
+  }
+
   render() {
-    console.log(this.state.sortField, 'field');
-    const { sortField, fpPer, seas, wks } = this.state;
+    const { sortField, fpPer, seas, wks, loading } = this.state;
     let sorted = [];
     if (fpPer.length === 32) {
-      sorted = fpPer.sort((a, b) => {
-        return b[sortField] - a[sortField];
-      });
+      sorted = this.sortResult(fpPer);
     }
     const teamStats = sorted.map((stats, i) => {
       const { logo } = nflTeams.find(({ team }) => team === stats.team);
@@ -103,7 +114,7 @@ class Dashboard extends Component {
           <div className="row buttons">
             <div className="four columns">
               <SelectField
-                floatingLabelText="Season"
+                floatingLabelText="Sort By"
                 value={sortField}
                 onChange={this.changeSortBy}
               >
@@ -136,9 +147,13 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
+        {loading ? 
+        <CircularProgress size={60} thickness={7} /> 
+        :
         <div className="cards">
           {teamStats}
         </div>
+        }
       </div>
     );
   }

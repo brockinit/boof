@@ -24,45 +24,55 @@ export function flattenPlays(away, home) {
   return awayPlays.concat(homePlays);
 }
 
+/* Helper function for calculateFpPer */
+function findStatSums(plays) {
+  let statSums = {
+    totalRushPlays: 0,
+    totalPassPlays: 0,
+    rushYards: 0,
+    passYards: 0,
+    rushTds: 0,
+    passTds: 0,
+    totalSacks: 0,
+  };
+
+  plays.forEach(({ rushPlays, passPlays, touchdowns, sacks }) => {
+    sacks.forEach(() => statSums.totalSacks++);
+    rushPlays.forEach((rush) => {
+      statSums.rushYards += rush.yds;
+      statSums.totalRushPlays++;
+    });
+    passPlays.forEach((pass) => {
+      statSums.passYards += pass.yds;
+      statSums.totalPassPlays++;
+    });
+    touchdowns.forEach((td, i) => {
+      if (td.type === 'RUSH') {
+        statSums.rushTds++;
+      }
+      if (td.type === 'REC') {
+        statSums.passTds++;
+      }
+    });
+  });
+  return statSums;
+}
+
 /*
   * Calculates fantasy points per play metrics
 */
 export function calculateFpPer(data, team, games) {
   const plays = flattenPlays(data.away, data.home);
-  let totalRushPlays = 0;
-  let totalPassPlays = 0;
-  let rushYards = 0;
-  let passYards = 0;
-  let rushTds = 0;
-  let passTds = 0;
-  let totalSacks = 0;
+  const {
+    totalRushPlays,
+    totalPassPlays,
+    rushYards,
+    passYards,
+    rushTds,
+    passTds,
+    totalSacks,
+  } = findStatSums(plays);
 
-  plays.forEach(({ rushPlays, passPlays, touchdowns, sacks }) => {
-    sacks.forEach(() => totalSacks++);
-    rushPlays.forEach((rush) =>  {
-      rushYards += rush.yds;
-      totalRushPlays++;
-    });
-    passPlays.forEach((pass) =>  {
-      passYards += pass.yds;
-      totalPassPlays++;
-    });
-    touchdowns.forEach((td, i) => {
-      if (td.type === 'RUSH') {
-        rushTds++;
-      }
-      if (td.type === 'REC') {
-        passTds++;
-      }
-    });
-  });
-  console.log(team, 'team');
-  console.log(totalRushPlays, 'rushPlays');
-  console.log(totalPassPlays, 'passPlays');
-  console.log(passYards, 'passYards');
-  console.log(rushYards, 'rushYards');
-  console.log(passTds, 'passTds');
-  console.log(rushTds, 'rushTds');
   const rushFantasyPoints = {
     rushYards: rushYards * 0.1,
     rushScores: rushTds * 6,
@@ -87,6 +97,13 @@ export function calculateFpPer(data, team, games) {
       opponent = game.v;
     }
   }
+  console.log(team, 'team');
+  console.log(totalRushPlays, 'rushPlays');
+  console.log(totalPassPlays, 'passPlays');
+  console.log(passYards, 'passYards');
+  console.log(rushYards, 'rushYards');
+  console.log(passTds, 'passTds');
+  console.log(rushTds, 'rushTds');
   return {
     team,
     opponent,
