@@ -20,6 +20,7 @@ const initialState = {
   seas: 2016,
   sortField: 'pointsPerRush',
   wks: { value: [7,8,9], label: 'Season' },
+  currentWk: 10,
   fpPer: [],
   loading: true,
 };
@@ -41,7 +42,7 @@ class Dashboard extends Component {
       query: scheduleQuery,
       variables: {
         seas: this.state.seas,
-        wk: 10,
+        wk: this.state.currentWk,
       },
     })
     .then(({ data }) => this.setState({ games: data.schedule }));
@@ -57,7 +58,7 @@ class Dashboard extends Component {
         },
       })
       .then(({ data }) => calculateFpPer(data, team, this.state.games))
-      .then((statTotals) => fpPer = [...fpPer, statTotals])
+      .then(statTotals => fpPer = [...fpPer, statTotals])
       .then(() => {
         if (fpPer.length === 32) {
           this.setState({ fpPer, loading: false });
@@ -147,13 +148,19 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-        {loading ? 
-        <CircularProgress size={60} thickness={7} /> 
-        :
-        <div className="cards">
-          {teamStats}
+        <div className="content">
+          {loading ? 
+          <CircularProgress 
+            size={150} 
+            thickness={7}
+            color="black"
+          /> 
+          :
+          <div className="cards">
+            {teamStats}
+          </div>
+          }
         </div>
-        }
       </div>
     );
   }

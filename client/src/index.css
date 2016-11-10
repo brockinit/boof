@@ -5,6 +5,11 @@ body {
   font-family: sans-serif;
 }
 
+.content {
+  text-align: center;
+  margin: auto;
+}
+
 .container {
   font-family: 'Roboto', sans-serif;
   code {
