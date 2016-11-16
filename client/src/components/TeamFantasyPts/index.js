@@ -14,6 +14,8 @@ class TeamFantasyPts extends Component {
             <br />          
             <code>{stats.pointsPerRush} points per rush</code>
             <br />
+            <code>{stats.ydsPerRush} yards per rush</code>
+            <br />
             <code>{stats.pointsPerPass} points per pass</code>
             <br />
             <code>{stats.totalRushFantasyPoints.toFixed(2)} total rush fantasy points</code>

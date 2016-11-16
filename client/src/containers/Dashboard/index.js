@@ -4,7 +4,7 @@ import {
   teamMetrics,
 } from '../../constants';
 import { TeamFantasyPts } from '../../components';
-import { flattenPlays, calculateFpPer } from '../../utils'; 
+import { calculateFpPer } from '../../utils'; 
 import { playQuery, scheduleQuery } from '../../queries';
 import { withApollo } from 'react-apollo';
 import ApolloClient from 'apollo-client';
@@ -19,8 +19,8 @@ const initialState = {
   offenseLabelColor: '#000',
   seas: 2016,
   sortField: 'pointsPerRush',
-  wks: { value: [6,7,8,9], label: 'Season' },
-  currentWk: 10,
+  wks: { value: [7,8,9,10], label: 'Season' },
+  currentWk: 11,
   fpPer: [],
   loading: true,
 };
@@ -85,7 +85,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { sortField, fpPer, seas, wks, loading } = this.state;
+    const { sortField, fpPer, wks, loading } = this.state;
     let sorted = [];
     if (fpPer.length === 32) {
       sorted = this.sortResult(fpPer);
@@ -137,11 +137,11 @@ class Dashboard extends Component {
                 onChange={this.changeWeeks}
               >
                 <MenuItem  
-                  value={[7,8,9]} 
+                  value={[7,8,9,10]} 
                   primaryText="Last 3 Weeks" 
                 />
                 <MenuItem  
-                  value={[1,2,3,4,5,6,7,8,9]} 
+                  value={[1,2,3,4,5,6,7,8,9,10]} 
                   primaryText="Full Season" 
                 />
               </SelectField>

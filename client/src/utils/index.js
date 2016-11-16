@@ -91,10 +91,9 @@ export function calculateFpPer(data, team, games, wks) {
   const totalPassFantasyPoints = passFantasyPoints.passYards + passFantasyPoints.passScores;
   const totalFantasyPoints = totalRushFantasyPoints + totalPassFantasyPoints;
   const pointsPerRush = +(totalRushFantasyPoints / totalRushPlays).toFixed(2);
+  const ydsPerRush = +(rushYards / totalRushPlays).toFixed(2);
   const pointsPerPass = +(totalPassFantasyPoints / totalPassPlays).toFixed(2);
-  const game = games.find((game) => {
-    return game.v === team || game.h === team;
-  });
+  const game = games.find(game => game.v === team || game.h === team);
   let opponent = 'BYE';
   if (game) {
     if (game.v === team) {
@@ -113,7 +112,8 @@ export function calculateFpPer(data, team, games, wks) {
   return {
     team,
     opponent,
-    pointsPerRush, 
+    pointsPerRush,
+    ydsPerRush, 
     pointsPerPass,
     totalPassFantasyPoints,
     totalRushFantasyPoints,
