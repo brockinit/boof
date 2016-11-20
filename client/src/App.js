@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="container">
         <AppBar title="Better Odds of Football" />
-        <Dashboard />
+        {this.props.children}
       </div>
     );
   }

@@ -3,6 +3,7 @@ import GameType from './GameType';
 import ConvType from './ConvType';
 import DriveType from './DriveType';
 import DefenseType from './DefenseType';
+import FanduelType from './FanduelType';
 import FumbleType from './FumbleType';
 import FGXPType from './FGXPType';
 import BlockType from './BlockType';
@@ -25,6 +26,7 @@ import TouchdownType from './TouchdownType';
 module.exports = {
   IntercptType,
   GameType,
+  FanduelType,
   FumbleType,
   FGXPType,
   BlockType,

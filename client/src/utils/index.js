@@ -122,3 +122,12 @@ export function calculateFpPer(data, team, games, wks) {
   };  
 }
 
+export function calculateCostToValue(data) {
+  return data
+  .filter(player => player.fdsalary && player.fdsalary > 0 && player.fdpts > 0)
+  .map(player => ({
+    ...player,
+    cToV: +(player.fdsalary / player.fdpts).toFixed(2)
+  }));
+}
+

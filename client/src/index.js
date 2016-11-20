@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import BoofRouter from './routes';
 import './index.css';
+
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+injectTapEventPlugin();
 const client = new ApolloClient({
   networkInterface: createNetworkInterface('http://localhost:8000/graphql'),
 });
@@ -15,7 +16,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <MuiThemeProvider>
-      <App />
+      <BoofRouter />
     </MuiThemeProvider>
   </ApolloProvider>,
   document.getElementById('root')

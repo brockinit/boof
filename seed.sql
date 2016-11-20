@@ -5,9 +5,9 @@
 --
 
 CREATE TABLE IF NOT EXISTS fanduel (
-  gid       INTEGER     NOT NULL,
   week      INTEGER     NOT NULL,
   year      INTEGER     NOT NULL,
+  gid       INTEGER     NOT NULL,
   name      VARCHAR(30) NOT NULL,
   pos       VARCHAR(30) NOT NULL,
   team      VARCHAR(7)  NOT NULL,
@@ -898,7 +898,6 @@ CREATE TABLE IF NOT EXISTS team (
 \COPY rush FROM './nfl_00-15/csv/rush.csv' DELIMITER ',' CSV HEADER;
 \COPY sack FROM './nfl_00-15/csv/sack.csv' DELIMITER ',' CSV HEADER;
 \COPY safety FROM './nfl_00-15/csv/safety.csv' DELIMITER ',' CSV HEADER;
-\COPY schedule FROM './nfl_00-15/csv/schedule.csv' DELIMITER ',' CSV HEADER;
 \COPY tackle FROM './nfl_00-15/csv/tackle.csv' DELIMITER ',' CSV HEADER;
 \COPY td FROM './nfl_00-15/csv/td.csv' DELIMITER ',' CSV HEADER;
 \COPY team FROM './nfl_00-15/csv/team.csv' DELIMITER ',' CSV HEADER;
