@@ -874,6 +874,8 @@ CREATE TABLE IF NOT EXISTS team (
 \COPY fanduel FROM './fan_duel_16/wk8.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk9.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk10.csv' DELIMITER ',' CSV HEADER;
+\COPY fanduel FROM './fan_duel_16/wk11.csv' DELIMITER ',' CSV HEADER;
+\COPY fanduel FROM './fan_duel_16/wk12.csv' DELIMITER ',' CSV HEADER;
 
 \COPY block FROM './nfl_00-15/csv/BLOCK.csv' DELIMITER ',' CSV HEADER;
 \COPY conv FROM './nfl_00-15/csv/conv.csv' DELIMITER ',' CSV HEADER;
@@ -889,7 +891,7 @@ CREATE TABLE IF NOT EXISTS team (
 \COPY offense FROM './nfl_00-15/csv/offense.csv' DELIMITER ',' CSV HEADER;
 \COPY oline FROM './nfl_00-15/csv/oline.csv' DELIMITER ',' CSV HEADER;
 \COPY pass FROM './nfl_00-15/csv/pass.csv' DELIMITER ',' CSV HEADER;
-\COPY pbp FROM './nfl_00-15/csv/pbp.csv' DELIMITER ',' CSV HEADER;
+-- \COPY pbp FROM './nfl_00-15/csv/pbp.csv' DELIMITER ',' CSV HEADER;
 \COPY penalty FROM './nfl_00-15/csv/penalty.csv' DELIMITER ',' CSV HEADER;
 \COPY play FROM './nfl_00-15/csv/play.csv' DELIMITER ',' CSV HEADER;
 \COPY player FROM './nfl_00-15/csv/player.csv' DELIMITER ',' CSV HEADER;
@@ -916,7 +918,7 @@ CREATE TABLE IF NOT EXISTS team (
 \COPY offense FROM './nfl_16/offense.csv' DELIMITER ',' CSV HEADER;
 \COPY oline FROM './nfl_16/oline.csv' DELIMITER ',' CSV HEADER;
 \COPY pass FROM './nfl_16/pass.csv' DELIMITER ',' CSV HEADER;
-\COPY pbp FROM './nfl_16/pbp.csv' DELIMITER ',' CSV HEADER;
+-- \COPY pbp FROM './nfl_16/pbp.csv' DELIMITER ',' CSV HEADER;
 \COPY penalty FROM './nfl_16/penalty.csv' DELIMITER ',' CSV HEADER;
 \COPY play FROM './nfl_16/play.csv' DELIMITER ',' CSV HEADER;
 \COPY player FROM './nfl_16/player.csv' DELIMITER ',' CSV HEADER;

@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { 
   nflTeams, 
   teamMetrics,
+  allSeason,
+  lastThreeWeeks,
 } from '../../constants';
 import { TeamFantasyPts } from '../../components';
 import { calculateFpPer } from '../../utils'; 
@@ -19,8 +21,8 @@ const initialState = {
   offenseLabelColor: '#000',
   seas: 2016,
   sortField: 'pointsPerRush',
-  wks: { value: [7,8,9,10], label: 'Season' },
-  currentWk: 11,
+  wks: { value: lastThreeWeeks, label: 'Season' },
+  currentWk: 12,
   fpPer: [],
   loading: true,
 };

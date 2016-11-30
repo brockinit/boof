@@ -1,3 +1,7 @@
+/* Used for computing weekly data rankings */
+export const allSeason = [1,2,3,4,5,6,7,8,9,10,11,12];
+export const lastThreeWeeks = [9,10,11,12];
+
 /* List of NFL Teams and Logos */
 export const nflTeams = [
   { team: 'DEN', logo: 'https://upload.wikimedia.org/wikipedia/en/4/44/Denver_Broncos_logo.svg' },

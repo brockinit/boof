@@ -15,9 +15,9 @@ import MenuItem from 'material-ui/MenuItem';
 const initialState = {
   sortField: 'cToV',
   costToValueData: [],
-  weeks: { value: [7,8,9,10], label: 'Season' },
+  weeks: { value: [8], label: 'Season' },
   currentWk: 11,
-  pos: ['QB'],
+  pos: ['WR'],
   loading: true,
 };
 
@@ -27,6 +27,7 @@ class CostToValue extends Component {
     this.state = initialState;
     this.changeSortBy = this.changeSortBy.bind(this);
     this.sortResult = this.sortResult.bind(this);
+    // this.splitName = this.splitName.bind(this);
   }
 
   componentDidMount() {
@@ -51,9 +52,19 @@ class CostToValue extends Component {
 
   sortResult(fpPer) {
     return fpPer
-      .sort((a, b) => b[this.state.sortField] - a[this.state.sortField])
+      .sort((a, b) => a[this.state.sortField] - b[this.state.sortField])
       .filter(({ opponent }) => opponent !== 'BYE');
   }
+
+  // splitName(name) {
+  //   let formattedName = name;
+  //   for (let i = 0; i < name.length; i++) {
+  //     if (i !== 0 && name[i].toUpperCase() === name[i]) {
+  //       formattedName = name.replace(name[i], `, ${name[i]}`);
+  //     }
+  //   }
+  //   return formattedName;
+  // }
 
   render() {
     const { sortField, costToValueData, weeks, loading } = this.state;

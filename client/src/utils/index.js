@@ -128,6 +128,7 @@ export function calculateCostToValue(data) {
   .map(player => ({
     ...player,
     cToV: +(player.fdsalary / player.fdpts).toFixed(2)
-  }));
+  }))
+  .slice(0, 5);
 }
 
