@@ -727,164 +727,8 @@ CREATE TABLE IF NOT EXISTS team (
   snpd  SMALLINT      NOT NULL
 );
 
-
---
--- Indexes for table block
--- --
--- ALTER TABLE block
--- ADD CONSTRAINT pid UNIQUE  (pid);
-
--- --
--- -- Indexes for table conv
--- --
--- ALTER TABLE conv
--- ADD CONSTRAINT pid UNIQUE  (pid);
-
--- --
--- -- Indexes for table defense
--- --
--- ALTER TABLE defense
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY gid (gid), ADD KEY player (player);
-
--- --
--- -- Indexes for table drive
--- --
--- ALTER TABLE drive
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY gid (gid), ADD KEY fpid (fpid), ADD KEY tname (tname);
-
--- --
--- -- Indexes for table fgxp
--- --
--- ALTER TABLE fgxp
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY fgxp (fgxp);
-
--- --
--- -- Indexes for table fumble
--- --
--- ALTER TABLE fumble
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY fum (fum);
-
--- --
--- -- Indexes for table game
--- --
--- ALTER TABLE game
--- ADD CONSTRAINT gid UNIQUE  (gid), ADD KEY seas (seas);
-
--- --
--- -- Indexes for table intercpt
--- --
--- ALTER TABLE intercpt
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY psr (psr), ADD KEY ints (ints);
-
--- --
--- -- Indexes for table kicker
--- --
--- ALTER TABLE kicker
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY gid (gid), ADD KEY player (player);
-
--- --
--- -- Indexes for table koff
--- --
--- ALTER TABLE koff
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY kicker (kicker);
-
--- --
--- -- Indexes for table offense
--- --
--- ALTER TABLE offense
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY gid (gid), ADD KEY player (player);
-
--- --
--- -- Indexes for table oline
--- --
--- ALTER TABLE oline
--- ADD CONSTRAINT olid UNIQUE  (olid);
-
--- --
--- -- Indexes for table pass
--- --
--- ALTER TABLE pass
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY psr (psr), ADD KEY trg (trg);
-
--- --
--- -- Indexes for table penalty
--- --
--- ALTER TABLE penalty
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY pid (pid);
-
--- --
--- -- Indexes for table play
--- --
--- ALTER TABLE play
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY gid (gid);
-
--- --
--- -- Indexes for table player
--- --
--- ALTER TABLE player
--- ADD CONSTRAINT player UNIQUE  (player), ADD KEY fname (fname), ADD KEY lname (lname);
-
--- --
--- -- Indexes for table punt
--- --
--- ALTER TABLE punt
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY punter (punter);
-
--- --
--- -- Indexes for table redzone
--- --
--- ALTER TABLE redzone
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY gid (gid), ADD KEY player (player);
-
--- --
--- -- Indexes for table rush
--- --
--- ALTER TABLE rush
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY bc (bc);
-
--- --
--- -- Indexes for table sack
--- --
--- ALTER TABLE sack
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY pid (pid), ADD KEY qb (qb), ADD KEY sk (sk);
-
--- --
--- -- Indexes for table safety
--- --
--- ALTER TABLE safety
--- ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY saf (saf);
-
--- --
--- -- Indexes for table schedule
--- --
--- ALTER TABLE schedule
---   ADD CONSTRAINT gid UNIQUE  (gid);
-
--- --
--- -- Indexes for table tackle
--- --
--- ALTER TABLE tackle
--- ADD CONSTRAINT uid UNIQUE  (uid), ADD KEY pid (pid), ADD KEY tck (tck);
-
--- --
--- -- Indexes for table team
--- --
--- ALTER TABLE team
--- ADD CONSTRAINT tid UNIQUE  (tid), ADD KEY gid (gid), ADD KEY tname (tname);
-
--- --
--- -- Indexes for table td
--- --
--- ALTER TABLE td
---   ADD CONSTRAINT pid UNIQUE  (pid), ADD KEY player (player);
-
-/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
-
-
 /* Seed Script */
-\COPY entry FROM './fanduel_history_1211.csv' DELIMITER ',' CSV HEADER;
+\COPY entry FROM './fanduel_history_1222.csv' DELIMITER ',' CSV HEADER;
 
 \COPY fanduel FROM './fan_duel_16/wk1.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk2.csv' DELIMITER ',' CSV HEADER;
@@ -928,30 +772,30 @@ CREATE TABLE IF NOT EXISTS team (
 \COPY td FROM './nfl_00-15/csv/td.csv' DELIMITER ',' CSV HEADER;
 \COPY team FROM './nfl_00-15/csv/team.csv' DELIMITER ',' CSV HEADER;
 
-\COPY block FROM './nfl_16/block.csv' DELIMITER ',' CSV HEADER;
-\COPY conv FROM './nfl_16/conv.csv' DELIMITER ',' CSV HEADER;
-\COPY defense FROM './nfl_16/defense.csv' DELIMITER ',' CSV HEADER;
-\COPY drive FROM './nfl_16/drive.csv' DELIMITER ',' CSV HEADER;
-\COPY fgxp FROM './nfl_16/fgxp.csv' DELIMITER ',' CSV HEADER;
-\COPY fumble FROM './nfl_16/fumble.csv' DELIMITER ',' CSV HEADER;
-\COPY game FROM './nfl_16/game.csv' DELIMITER ',' CSV HEADER;
-\COPY injury FROM './nfl_16/injury.csv' DELIMITER ',' CSV HEADER;
-\COPY intercpt FROM './nfl_16/intercpt.csv' DELIMITER ',' CSV HEADER;
-\COPY kicker FROM './nfl_16/kicker.csv' DELIMITER ',' CSV HEADER;
-\COPY koff FROM './nfl_16/koff.csv' DELIMITER ',' CSV HEADER;
-\COPY offense FROM './nfl_16/offense.csv' DELIMITER ',' CSV HEADER;
-\COPY oline FROM './nfl_16/oline.csv' DELIMITER ',' CSV HEADER;
-\COPY pass FROM './nfl_16/pass.csv' DELIMITER ',' CSV HEADER;
--- \COPY pbp FROM './nfl_16/pbp.csv' DELIMITER ',' CSV HEADER;
-\COPY penalty FROM './nfl_16/penalty.csv' DELIMITER ',' CSV HEADER;
-\COPY play FROM './nfl_16/play.csv' DELIMITER ',' CSV HEADER;
-\COPY player FROM './nfl_16/player.csv' DELIMITER ',' CSV HEADER;
-\COPY punt FROM './nfl_16/punt.csv' DELIMITER ',' CSV HEADER;
-\COPY redzone FROM './nfl_16/redzone.csv' DELIMITER ',' CSV HEADER;
-\COPY rush FROM './nfl_16/rush.csv' DELIMITER ',' CSV HEADER;
-\COPY sack FROM './nfl_16/sack.csv' DELIMITER ',' CSV HEADER;
-\COPY safety FROM './nfl_16/safety.csv' DELIMITER ',' CSV HEADER;
-\COPY schedule FROM './nfl_16/schedule.csv' DELIMITER ',' CSV HEADER;
-\COPY tackle FROM './nfl_16/tackle.csv' DELIMITER ',' CSV HEADER;
-\COPY td FROM './nfl_16/td.csv' DELIMITER ',' CSV HEADER;
-\COPY team FROM './nfl_16/team.csv' DELIMITER ',' CSV HEADER;
+\COPY block FROM './nfl_16/csv/block.csv' DELIMITER ',' CSV HEADER;
+\COPY conv FROM './nfl_16/csv/conv.csv' DELIMITER ',' CSV HEADER;
+\COPY defense FROM './nfl_16/csv/defense.csv' DELIMITER ',' CSV HEADER;
+\COPY drive FROM './nfl_16/csv/drive.csv' DELIMITER ',' CSV HEADER;
+\COPY fgxp FROM './nfl_16/csv/fgxp.csv' DELIMITER ',' CSV HEADER;
+\COPY fumble FROM './nfl_16/csv/fumble.csv' DELIMITER ',' CSV HEADER;
+\COPY game FROM './nfl_16/csv/game.csv' DELIMITER ',' CSV HEADER;
+\COPY injury FROM './nfl_16/csv/injury.csv' DELIMITER ',' CSV HEADER;
+\COPY intercpt FROM './nfl_16/csv/intercpt.csv' DELIMITER ',' CSV HEADER;
+\COPY kicker FROM './nfl_16/csv/kicker.csv' DELIMITER ',' CSV HEADER;
+\COPY koff FROM './nfl_16/csv/koff.csv' DELIMITER ',' CSV HEADER;
+\COPY offense FROM './nfl_16/csv/offense.csv' DELIMITER ',' CSV HEADER;
+\COPY oline FROM './nfl_16/csv/oline.csv' DELIMITER ',' CSV HEADER;
+\COPY pass FROM './nfl_16/csv/pass.csv' DELIMITER ',' CSV HEADER;
+-- \COPY pbp FROM './nfl_16/csv/pbp.csv' DELIMITER ',' CSV HEADER;
+\COPY penalty FROM './nfl_16/csv/penalty.csv' DELIMITER ',' CSV HEADER;
+\COPY play FROM './nfl_16/csv/play.csv' DELIMITER ',' CSV HEADER;
+\COPY player FROM './nfl_16/csv/player.csv' DELIMITER ',' CSV HEADER;
+\COPY punt FROM './nfl_16/csv/punt.csv' DELIMITER ',' CSV HEADER;
+\COPY redzone FROM './nfl_16/csv/redzone.csv' DELIMITER ',' CSV HEADER;
+\COPY rush FROM './nfl_16/csv/rush.csv' DELIMITER ',' CSV HEADER;
+\COPY sack FROM './nfl_16/csv/sack.csv' DELIMITER ',' CSV HEADER;
+\COPY safety FROM './nfl_16/csv/safety.csv' DELIMITER ',' CSV HEADER;
+\COPY schedule FROM './nfl_16/csv/schedule.csv' DELIMITER ',' CSV HEADER;
+\COPY tackle FROM './nfl_16/csv/tackle.csv' DELIMITER ',' CSV HEADER;
+\COPY td FROM './nfl_16/csv/td.csv' DELIMITER ',' CSV HEADER;
+\COPY team FROM './nfl_16/csv/team.csv' DELIMITER ',' CSV HEADER;
