@@ -113,13 +113,15 @@ export function calculateFpPer(data, team, games, wks) {
     team,
     opponent,
     pointsPerRush,
-    ydsPerRush, 
+    ydsPerRush,
     pointsPerPass,
     totalPassFantasyPoints,
     totalRushFantasyPoints,
     totalFantasyPoints,
     totalSacks,
-  };  
+    rushTds,
+    passTds,
+  };
 }
 
 export function calculateCostToValue(data) {

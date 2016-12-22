@@ -1,6 +1,26 @@
 \c boof;
 
 --
+-- Table structure for table entry
+--
+
+CREATE TABLE IF NOT EXISTS entry (
+  entryid    VARCHAR(30)  NOT NULL,
+  sport      VARCHAR(7)   NOT NULL,
+  date       DATE         NOT NULL,
+  title      VARCHAR(128) NOT NULL,
+  salarycap  VARCHAR(30)  NOT NULL,
+  score      FLOAT8       NOT NULL,
+  postion    INTEGER      NOT NULL,
+  entries    INTEGER      NOT NULL,
+  opponent   VARCHAR(30)  NOT NULL,
+  entrycost  INTEGER      NOT NULL,
+  winnings   FLOAT8       NOT NULL,
+  link       VARCHAR(128) NOT NULL
+);
+COMMENT ON TABLE entry IS 'FanDuel entries';
+
+--
 -- Table structure for table fanduel
 --
 
@@ -14,7 +34,7 @@ CREATE TABLE IF NOT EXISTS fanduel (
   homeaway  VARCHAR(7)  NOT NULL,
   oppt      VARCHAR(7)  NOT NULL,
   fdpts     FLOAT8      NOT NULL,
-  fdsalary  INTEGER     DEFAULt NULL
+  fdsalary  INTEGER     DEFAULT NULL
 );
 COMMENT ON TABLE fanduel IS 'FanDuel prices and scores for each player';
 
@@ -864,6 +884,8 @@ CREATE TABLE IF NOT EXISTS team (
 
 
 /* Seed Script */
+\COPY entry FROM './fanduel_history_1211.csv' DELIMITER ',' CSV HEADER;
+
 \COPY fanduel FROM './fan_duel_16/wk1.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk2.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk3.csv' DELIMITER ',' CSV HEADER;
@@ -876,6 +898,8 @@ CREATE TABLE IF NOT EXISTS team (
 \COPY fanduel FROM './fan_duel_16/wk10.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk11.csv' DELIMITER ',' CSV HEADER;
 \COPY fanduel FROM './fan_duel_16/wk12.csv' DELIMITER ',' CSV HEADER;
+\COPY fanduel FROM './fan_duel_16/wk13.csv' DELIMITER ',' CSV HEADER;
+\COPY fanduel FROM './fan_duel_16/wk14.csv' DELIMITER ',' CSV HEADER;
 
 \COPY block FROM './nfl_00-15/csv/BLOCK.csv' DELIMITER ',' CSV HEADER;
 \COPY conv FROM './nfl_00-15/csv/conv.csv' DELIMITER ',' CSV HEADER;

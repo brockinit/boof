@@ -1,6 +1,6 @@
 /* Used for computing weekly data rankings */
-export const allSeason = [1,2,3,4,5,6,7,8,9,10,11,12];
-export const lastThreeWeeks = [9,10,11,12];
+export const allSeason = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+export const lastThreeWeeks = [11,12,13,14];
 
 /* List of NFL Teams and Logos */
 export const nflTeams = [
@@ -42,7 +42,7 @@ export const nflTeams = [
 export const clickedColor = { color: '#039be5', labelColor: '#f2f2f2' };
 export const unclickedColor = { color: '#fff', labelColor: '#000' };
 
-export const seasons = [ 
+export const seasons = [
   2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008,
   2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000
 ];
@@ -50,7 +50,7 @@ export const seasons = [
 export const weeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 export const teamMetrics = [
-  'pointsPerRush', 
+  'pointsPerRush',
   'ydsPerRush',
   'pointsPerPass',
   'totalPassFantasyPoints',

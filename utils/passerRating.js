@@ -21,7 +21,7 @@ const c = () => {
   const part1 = td/att;
   return part1 * 20;
 };
-const d =  () => {
+const d = () => {
   const part1 = int/att;
   const part2 = part1 * 25;
   return 2.375 - part2;

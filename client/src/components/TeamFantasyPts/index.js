@@ -11,7 +11,7 @@ class TeamFantasyPts extends Component {
           <CardHeader title={`${stats.team} (${rank})`} avatar={avatar}  />
           <CardText>
             <code><strong>Opponent ({stats.opponent})</strong></code>
-            <br />          
+            <br />
             <code>{stats.pointsPerRush} points per rush</code>
             <br />
             <code>{stats.ydsPerRush} yards per rush</code>
@@ -25,6 +25,10 @@ class TeamFantasyPts extends Component {
             <code>{stats.totalFantasyPoints.toFixed(2)} total fantasy points</code>
             <br />
             <code>{stats.totalSacks} total sacks</code>
+            <br />
+            <code>{stats.rushTds} rushing touchdowns</code>
+            <br />
+            <code>{stats.passTds} passing touchdowns</code>
           </CardText>
         </Card>
       </div>

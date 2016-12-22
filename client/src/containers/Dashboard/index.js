@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { 
-  nflTeams, 
+import {
+  nflTeams,
   teamMetrics,
   allSeason,
   lastThreeWeeks,
 } from '../../constants';
 import { TeamFantasyPts } from '../../components';
-import { calculateFpPer } from '../../utils'; 
+import { calculateFpPer } from '../../utils';
 import { playQuery, scheduleQuery } from '../../queries';
 import { withApollo } from 'react-apollo';
 import ApolloClient from 'apollo-client';
@@ -22,7 +22,7 @@ const initialState = {
   seas: 2016,
   sortField: 'pointsPerRush',
   wks: { value: lastThreeWeeks, label: 'Season' },
-  currentWk: 12,
+  currentWk: 15,
   fpPer: [],
   loading: true,
 };
@@ -97,7 +97,7 @@ class Dashboard extends Component {
       if (i === 0 || i % 3 === 0) {
         return (
           <div className="row" key={i}>
-            <TeamFantasyPts 
+            <TeamFantasyPts
               key={stats.team}
               rank={i + 1}
               stats={stats}
@@ -106,13 +106,13 @@ class Dashboard extends Component {
         );
       }
       return (
-        <TeamFantasyPts 
-          key={stats.team} 
+        <TeamFantasyPts
+          key={stats.team}
           rank={i + 1}
           stats={stats}
           avatar={logo} />
       );
-    }); 
+    });
     return (
       <div className="container">
         <div className="App-header">
@@ -124,10 +124,10 @@ class Dashboard extends Component {
                 onChange={this.changeSortBy}
               >
                 {teamMetrics.map(metric =>
-                  <MenuItem 
-                    key={metric} 
-                    value={metric} 
-                    primaryText={metric} 
+                  <MenuItem
+                    key={metric}
+                    value={metric}
+                    primaryText={metric}
                   />
                 )}
               </SelectField>
@@ -138,13 +138,13 @@ class Dashboard extends Component {
                 value={wks.label}
                 onChange={this.changeWeeks}
               >
-                <MenuItem  
-                  value={[7,8,9,10]} 
-                  primaryText="Last 3 Weeks" 
+                <MenuItem
+                  value={[7,8,9,10]}
+                  primaryText="Last 3 Weeks"
                 />
-                <MenuItem  
-                  value={[1,2,3,4,5,6,7,8,9,10]} 
-                  primaryText="Full Season" 
+                <MenuItem
+                  value={[1,2,3,4,5,6,7,8,9,10]}
+                  primaryText="Full Season"
                 />
               </SelectField>
             </div>
@@ -153,12 +153,12 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="content">
-          {loading ? 
-          <CircularProgress 
-            size={150} 
+          {loading ?
+          <CircularProgress
+            size={150}
             thickness={7}
             color="black"
-          /> 
+          />
           :
           <div className="cards">
             {teamStats}
