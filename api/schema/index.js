@@ -6,8 +6,8 @@ import {
   GraphQLList,
 } from 'graphql';
 import { resolver } from 'graphql-sequelize';
-import { GameType, ScheduleType, FanduelType } from './types';
-import { game, schedule, fanduel } from '../connectors';
+import { GameType, ScheduleType, FanduelType, EntryType } from './types';
+import { game, schedule, fanduel, entry } from '../connectors';
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -38,6 +38,10 @@ const RootQueryType = new GraphQLObjectType({
         pos: { type: new GraphQLList(GraphQLString) },
       },
       resolve: resolver(fanduel),
+    },
+    entries: {
+      type: new GraphQLList(EntryType),
+      resolve: resolver(entry),
     },
   },
 });
