@@ -25,7 +25,7 @@ export default function (db, Sequelize) {
       type: Sequelize.FLOAT,
       allowNull: false,
     },
-    postion: {
+    position: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },

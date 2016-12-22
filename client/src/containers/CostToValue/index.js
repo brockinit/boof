@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { 
-  nflTeams, 
+import {
   teamMetrics,
 } from '../../constants';
-import { TeamFantasyPts } from '../../components';
-import { calculateCostToValue } from '../../utils'; 
+import { calculateCostToValue } from '../../utils';
 import { fanduelQuery } from '../../queries';
 import { withApollo } from 'react-apollo';
 import ApolloClient from 'apollo-client';
@@ -27,7 +25,6 @@ class CostToValue extends Component {
     this.state = initialState;
     this.changeSortBy = this.changeSortBy.bind(this);
     this.sortResult = this.sortResult.bind(this);
-    // this.splitName = this.splitName.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +39,7 @@ class CostToValue extends Component {
     .then(({ data: { fanDuel } }) => calculateCostToValue(fanDuel))
     .then(costToValueData => {
       console.log(costToValueData, 'costToValueData');
-      this.setState({ costToValueData, loading: false }); 
+      this.setState({ costToValueData, loading: false });
     });
   }
 
@@ -56,41 +53,12 @@ class CostToValue extends Component {
       .filter(({ opponent }) => opponent !== 'BYE');
   }
 
-  // splitName(name) {
-  //   let formattedName = name;
-  //   for (let i = 0; i < name.length; i++) {
-  //     if (i !== 0 && name[i].toUpperCase() === name[i]) {
-  //       formattedName = name.replace(name[i], `, ${name[i]}`);
-  //     }
-  //   }
-  //   return formattedName;
-  // }
-
   render() {
     const { sortField, costToValueData, weeks, loading } = this.state;
     const sorted = this.sortResult(costToValueData);
     const playerFdStats = sorted.map((stats, i) => {
       return <div>{`${stats.name} ${stats.cToV}`}</div>
-      // const { logo } = nflTeams.find(({ team }) => team === stats.team);
-      // if (i === 0 || i % 3 === 0) {
-      //   return (
-      //     <div className="row" key={i}>
-      //       <TeamFantasyPts 
-      //         key={stats.team}
-      //         rank={i + 1}
-      //         stats={stats}
-      //         avatar={logo}  />
-      //     </div>
-      //   );
-      // }
-      // return (
-      //   <TeamFantasyPts 
-      //     key={stats.team} 
-      //     rank={i + 1}
-      //     stats={stats}
-      //     avatar={logo} />
-      // );
-    }); 
+    });
     return (
       <div className="container">
         <div className="App-header">
@@ -102,10 +70,10 @@ class CostToValue extends Component {
                 onChange={this.changeSortBy}
               >
                 {teamMetrics.map(metric =>
-                  <MenuItem 
-                    key={metric} 
-                    value={metric} 
-                    primaryText={metric} 
+                  <MenuItem
+                    key={metric}
+                    value={metric}
+                    primaryText={metric}
                   />
                 )}
               </SelectField>
@@ -116,13 +84,13 @@ class CostToValue extends Component {
                 value={weeks.label}
                 onChange={this.changeWeeks}
               >
-                <MenuItem  
-                  value={[7,8,9,10]} 
-                  primaryText="Last 3 Weeks" 
+                <MenuItem
+                  value={[7,8,9,10]}
+                  primaryText="Last 3 Weeks"
                 />
-                <MenuItem  
-                  value={[1,2,3,4,5,6,7,8,9,10]} 
-                  primaryText="Full Season" 
+                <MenuItem
+                  value={[1,2,3,4,5,6,7,8,9,10]}
+                  primaryText="Full Season"
                 />
               </SelectField>
             </div>
@@ -131,12 +99,12 @@ class CostToValue extends Component {
           </div>
         </div>
         <div className="content">
-          {loading ? 
-          <CircularProgress 
-            size={150} 
+          {loading ?
+          <CircularProgress
+            size={150}
             thickness={7}
             color="black"
-          /> 
+          />
           :
           <div className="cards">
             {playerFdStats}

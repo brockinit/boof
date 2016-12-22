@@ -8,7 +8,7 @@ export const entryQuery = gql`
       title
       salarycap
       score
-      postion
+      position
       entries
       opponent
       entrycost

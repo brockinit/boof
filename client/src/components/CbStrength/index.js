@@ -23,12 +23,12 @@ class CbStrength extends Component {
           if (dfb && !defenders[dfb]) {
             defenders = { ...defenders, [dfb]: { yds, totalPlays: 1 } };
           } else if (dfb) {
-            let curDefender = defenders[dfb];
-            curDefender = { 
-              ...curDefender, 
-              yds: curDefender.yds += yds, 
-              totalPlays: curDefender.totalPlays++,
-            };
+            // let curDefender = defenders[dfb];
+            // curDefender = {
+            //   ...curDefender,
+            //   yds: curDefender.yds += yds,
+            //   totalPlays: curDefender.totalPlays++,
+            // };
           }
           passYards += yds;
           totalPassPlays++;
@@ -49,10 +49,10 @@ class CbStrength extends Component {
       };
       const totalPassFantasyPoints = passFantasyPoints.passYards + passFantasyPoints.passScores;
       const pointsPerPass = +(totalPassFantasyPoints / totalPassPlays).toFixed(2);
-      this.setState({ 
-        cbPtsAllowed: 
-          { 
-            team: this.props.team, 
+      this.setState({
+        cbPtsAllowed:
+          {
+            team: this.props.team,
             pointsPerPass,
             totalPassFantasyPoints,
           },
@@ -93,11 +93,11 @@ function flattenPlays(away, home) {
 }
 
 export default graphql(cbQuery, {
-  props: ({ 
-    ownProps, 
-    data: { 
-      away, 
-      home 
+  props: ({
+    ownProps,
+    data: {
+      away,
+      home
     } }) => ({ plays: flattenPlays(away, home) }),
   withRef: true,
 })(CbStrength);

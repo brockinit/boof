@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS entry (
   title      VARCHAR(128) NOT NULL,
   salarycap  VARCHAR(30)  NOT NULL,
   score      FLOAT8       NOT NULL,
-  postion    INTEGER      NOT NULL,
+  position   INTEGER      NOT NULL,
   entries    INTEGER      NOT NULL,
   opponent   VARCHAR(30)  NOT NULL,
   entrycost  INTEGER      NOT NULL,
