@@ -22,7 +22,7 @@ const initialState = {
   seas: 2016,
   sortField: 'pointsPerRush',
   wks: { value: lastThreeWeeks, label: 'Season' },
-  currentWk: 15,
+  currentWk: 17,
   fpPer: [],
   loading: true,
 };

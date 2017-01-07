@@ -21,14 +21,13 @@ class EntryHistory extends Component {
       query: entryQuery,
     })
     .then(({ data: { entries } }) => {
-      const averagePositions = entries.map(({ position, entries }) => {
+      let netWinnings = 0;
+      const averagePositions = entries.map(({ position, entries, winnings, entrycost }) => {
+        netWinnings += winnings;
+        netWinnings -= entrycost;
         return +((position / entries) * 100).toFixed(2);
       });
-
-      console.log(averagePositions, 'averagePositions');
       const topFifty = averagePositions.filter((position) => position < 50);
-      console.log(topFifty.length, 'top half finishes');
-      console.log(topFifty.length / entries.length, 'percentage in the top half');
     });
   }
 

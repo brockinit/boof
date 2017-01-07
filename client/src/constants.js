@@ -1,6 +1,6 @@
 /* Used for computing weekly data rankings */
-export const allSeason = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-export const lastThreeWeeks = [11,12,13,14];
+export const allSeason = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+export const lastThreeWeeks = [13,14,15,16];
 
 /* List of NFL Teams and Logos */
 export const nflTeams = [
